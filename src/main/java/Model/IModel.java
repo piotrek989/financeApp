@@ -12,6 +12,7 @@ public interface IModel {
     User getUserById(int id);
     ArrayList<Income> getUserIncomes(int userId);
     ArrayList<Expense> getUserExpenses(int userId);
+    boolean addUser(User user);
 
 }
 

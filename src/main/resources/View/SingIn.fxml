@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.SinginUI">
    <right>
       <AnchorPane prefHeight="400.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
@@ -18,27 +19,27 @@
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Label>
-            <TextField layoutX="59.0" layoutY="133.0" prefHeight="35.0" prefWidth="250.0" text="login">
+            <TextField fx:id="loginField" layoutX="59.0" layoutY="133.0" prefHeight="35.0" prefWidth="250.0" text="login">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField layoutX="59.0" layoutY="84.0" prefHeight="35.0" prefWidth="250.0" text="e-mail">
+            <TextField fx:id="emailField" layoutX="59.0" layoutY="84.0" prefHeight="35.0" prefWidth="250.0" text="e-mail">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button layoutX="54.0" layoutY="243.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #1591EA;" text="Register">
+            <Button fx:id="registerButton" layoutX="54.0" layoutY="243.0" mnemonicParsing="false" onAction="#handleRegisterButton" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #1591EA;" text="Register">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button layoutX="54.0" layoutY="313.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #1591EA;" text="Cancel">
+            <Button fx:id="cancelButton" layoutX="54.0" layoutY="313.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="260.0" style="-fx-background-color: #1591EA;" text="Cancel">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <TextField layoutX="59.0" layoutY="183.0" prefHeight="35.0" prefWidth="250.0" text="password">
+            <TextField fx:id="passwordField" layoutX="59.0" layoutY="183.0" prefHeight="35.0" prefWidth="250.0" text="password">
                <font>
                   <Font size="14.0" />
                </font>
@@ -56,7 +57,7 @@
             </Label>
             <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="50.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
                <image>
-<!--                  <Image url="@/logo/register.png" />-->
+                  <Image url="@../logo/register.png" />
                </image>
             </ImageView>
             <Label layoutX="39.0" layoutY="348.0" text="Copyright (c). All Rights Reserved.">

@@ -7,6 +7,9 @@ public class User {
         this.password = password;
         this.login = login;
     }
+    public User(){
+
+    }
     public int id;
     public String email;
     public String password;

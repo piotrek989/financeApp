@@ -97,4 +97,29 @@ public class ModelFacade implements IModel {
         return new ArrayList<>(0);
     }
 
+    @Override
+    public boolean addUser(User user) {
+        String procedureCall = "INSERT INTO users (email, password, login) VALUES (?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(procedureCall)) {
+
+            preparedStatement.setString(1, user.email);
+            preparedStatement.setString(2, user.password);
+            preparedStatement.setString(3, user.login);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Użytkownik został pomyślnie dodany.");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Błąd podczas dodawania użytkownika: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

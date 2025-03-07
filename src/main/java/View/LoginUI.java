@@ -29,7 +29,7 @@ public class LoginUI {
     @FXML
     private PasswordField passwordField;
 
-    public void getDataFromField(ActionEvent event){
+    public void getDataFromField(){
         login = loginField.getText().trim();
         password = passwordField.getText().trim();
     }
@@ -40,7 +40,7 @@ public class LoginUI {
 
     @FXML
     private void handleButtonClick(ActionEvent event){
-        getDataFromField(event);
+        getDataFromField();
         PresenterFacade facade = new PresenterFacade();
         User user = facade.logIn(login, password);
         if(user != null){

@@ -12,7 +12,16 @@ public class PresenterFacade implements IPresenter{
     }
 
     @Override
-    public boolean createAccount(int id, String email, String password, String name, String surname) {
-        return false;
+    public boolean createAccount(String email, String password, String login) {
+        ModelFacade facade = new ModelFacade();
+        User client = new User();
+        client.email = email;
+        client.password = password;
+        client.login = login;
+
+        boolean ifAddedUser = facade.addUser(client);//dodanie klienta do BD
+        if(ifAddedUser){
+            return true;
+        } else return false;
     }
 }
