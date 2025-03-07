@@ -14,12 +14,13 @@ public class UserView {
     private Scene scene;
     private Parent root;
 
-    public void switchToUserView(Stage stage) throws IOException{
+    public void switchToUserView(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
 
-        scene = new Scene(root);
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
+        Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show(); // Pokaż nową scenę
     }
 }

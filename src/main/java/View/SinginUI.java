@@ -29,22 +29,26 @@ public class SinginUI {
     @FXML
     private Button cancelButton;
 
-//    public void setMainStage(Stage stage){
-//        mainStage = stage;
-//    }
+
     public void getDataFromFields(){
         email = emailField.getText().trim();
         login = loginField.getText().trim();
         password = passwordField.getText().trim();
     }
+    public void cleanDataFromFields(){
+        emailField.clear();
+        loginField.clear();
+        passwordField.clear();
+    }
 
-    public void switchToSingInView(Stage stage) throws IOException {
+    public void switchToSingInView(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SingIn.fxml"));
-        root = loader.load();
+        Parent root = loader.load();
 
-        scene = new Scene(root);
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
+        Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show(); // Pokaż nową scenę
     }
 
     @FXML
@@ -62,6 +66,26 @@ public class SinginUI {
             stage.setScene(scene);
             stage.show(); // Pokaż nową scenę
         }
+    }
+
+    @FXML
+    private void handleCancelButton(ActionEvent event) throws IOException {
+        cleanDataFromFields();
+    }
+
+    @FXML
+    public void handleBackButton(ActionEvent event) throws IOException{
+        switchToLogInUI(event);
+    }
+
+    private void switchToLogInUI(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogIn.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); // Pokaż nową scenę
     }
 
 }

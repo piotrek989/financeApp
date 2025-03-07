@@ -46,7 +46,7 @@ public class LoginUI {
         if(user != null){
             var UserView = new UserView();
             try {
-                UserView.switchToUserView(stage);
+                UserView.switchToUserView(event);
             } catch (IOException e) {
                 e.printStackTrace(); // Możesz też dodać Alert z komunikatem błędu
             }
@@ -61,9 +61,9 @@ public class LoginUI {
     }
 
     @FXML
-    private void hyperlinkOperator() throws IOException {
+    private void hyperlinkOperator(ActionEvent event) throws IOException {
         var SinginUI = new SinginUI();
-        SinginUI.switchToSingInView(stage);
+        SinginUI.switchToSingInView(event);
     }
 
 }
