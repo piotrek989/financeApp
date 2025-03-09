@@ -2,38 +2,72 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0"
-            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LoginUI">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.LoginUI">
 
    <left>
-      <AnchorPane prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #90EE90;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="302.0" style="-fx-background-color: #4052D6;" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="64.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Finance App">
+            <Text layoutX="20.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Finance App" textAlignment="CENTER" wrappingWidth="261.462890625">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Text>
+            <Label layoutX="46.0" layoutY="345.0" text="Copyright (c). All Rights Reserved.">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="104.0" fitWidth="107.0" layoutX="99.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../logo/login.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="443.0" prefWidth="177.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="383.0" prefWidth="298.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="loginField" layoutX="-60.0" layoutY="184.0" onAction="#getDataFromField" style="-fx-background-color: transparent;             -fx-border-color: #0598ff;" text="User name" />
-            <PasswordField fx:id="passwordField" layoutX="-62.0" layoutY="250.0" onAction="#getDataFromField" style="-fx-background-color: transparent; -fx-border-color: #0598ff;" text="password" />
-            <Button fx:id="logInBtn" layoutX="-36.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="36.0" prefWidth="73.0" text="Login" />
-            <Text layoutX="-31.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
+            <PasswordField fx:id="passwordField" layoutX="73.0" layoutY="157.0" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#getDataFromField" prefHeight="35.0" prefWidth="150.0" promptText="password" style="-fx-background-color: transparent; -fx-border-color: #0598ff;">
                <font>
-                  <Font size="16.0" />
+                  <Font size="15.0" />
+               </font></PasswordField>
+            <Button fx:id="logInBtn" layoutX="80.0" layoutY="259.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="40.0" prefWidth="127.0" text="Login">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Text layoutX="114.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
+               <font>
+                  <Font name="System Bold Italic" size="27.0" />
                </font>
             </Text>
-            <Hyperlink fx:id="createAccHyperlink" layoutX="-58.0" layoutY="283.0" onAction="#hyperlinkOperator" text="Create new account!" />
+            <Hyperlink fx:id="createAccHyperlink" layoutX="78.0" layoutY="200.0" onAction="#hyperlinkOperator" text="Create new account!">
+               <font>
+                  <Font size="14.0" />
+               </font></Hyperlink>
+            <TextField fx:id="loginField" layoutX="73.0" layoutY="105.0" onAction="#getDataFromField" prefHeight="35.0" prefWidth="150.0" promptText="User name" style="-fx-background-color: transparent;             -fx-border-color: #0598ff;">
+               <font>
+                  <Font size="15.0" />
+               </font></TextField>
+            <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="219.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../logo/triangles.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="14.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../logo/triangles.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </right>

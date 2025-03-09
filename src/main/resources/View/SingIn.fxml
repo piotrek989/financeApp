@@ -18,12 +18,12 @@
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="loginField" layoutX="59.0" layoutY="133.0" prefHeight="35.0" prefWidth="250.0" text="login">
+            <TextField fx:id="loginField" layoutX="59.0" layoutY="133.0" prefHeight="35.0" prefWidth="250.0" promptText="login">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="emailField" layoutX="59.0" layoutY="84.0" prefHeight="35.0" prefWidth="250.0" text="e-mail">
+            <TextField fx:id="emailField" layoutX="59.0" layoutY="84.0" prefHeight="35.0" prefWidth="250.0" promptText="e-mail">
                <font>
                   <Font size="14.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <TextField fx:id="passwordField" layoutX="59.0" layoutY="183.0" prefHeight="35.0" prefWidth="250.0" text="password">
+            <TextField fx:id="passwordField" layoutX="59.0" layoutY="183.0" prefHeight="35.0" prefWidth="250.0" promptText="password">
                <font>
                   <Font size="14.0" />
                </font>

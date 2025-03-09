@@ -58,13 +58,7 @@ public class SinginUI {
         boolean ifaddedUser = facade.createAccount(email, password, login);
 
         if (ifaddedUser) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("UserView.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show(); // Pokaż nową scenę
+            switchToLogInUI(event);//po utworzeniu konta wracamy do okna logowania
         }
     }
 

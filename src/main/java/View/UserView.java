@@ -19,6 +19,8 @@ public class UserView {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
+        stage.setTitle("User panel");
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show(); // Pokaż nową scenę
