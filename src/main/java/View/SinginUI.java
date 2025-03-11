@@ -47,6 +47,7 @@ public class SinginUI {
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
         Scene scene = new Scene(root);
+        stage.setTitle("---Signing In---");
         stage.setScene(scene);
         stage.show(); // Pokaż nową scenę
     }

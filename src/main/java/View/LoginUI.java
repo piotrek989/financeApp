@@ -1,10 +1,12 @@
 package View;
 
 import Model.User;
-import View.UserView;
 import Presenter.PresenterFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -37,6 +39,16 @@ public class LoginUI {
         this.stage = stage;
     }
 
+    public void switchToLoginView(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(View.FinanceApplication.class.getResource("LogIn.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
+        Scene scene = new Scene(root);
+        stage.setTitle("---Logging---");
+        stage.setScene(scene);
+    }
+
 
     @FXML
     private void handleButtonClick(ActionEvent event){
@@ -44,9 +56,9 @@ public class LoginUI {
         PresenterFacade facade = new PresenterFacade();
         User user = facade.logIn(login, password);
         if(user != null){
-            var UserView = new UserView();
+            var UserView = new IncomsView();
             try {
-                UserView.switchToUserView(event);
+                UserView.switchToIncomsView(event);
             } catch (IOException e) {
                 e.printStackTrace(); // Możesz też dodać Alert z komunikatem błędu
             }
