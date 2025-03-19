@@ -1,5 +1,6 @@
 package View;
 
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,9 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ChartsView extends BaseUserView {
+public class ChartsView {
     public ChartsView(){
-        super();
         System.out.println("Charts View loaded");
     }
 

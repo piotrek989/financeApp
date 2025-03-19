@@ -1,6 +1,6 @@
 package View;
 
-import Model.Expense;
+import Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,9 +9,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ExpensesView extends BaseUserView{
+public class ExpensesView {
     public ExpensesView(){
-        super();
         System.out.println("Expenses View loaded");
     }
 

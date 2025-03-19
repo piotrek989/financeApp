@@ -16,7 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class LoginUI {
+public class LoginUI extends IncomsView{
 
     String login;
     String password;
@@ -56,9 +56,9 @@ public class LoginUI {
         PresenterFacade facade = new PresenterFacade();
         User user = facade.logIn(login, password);
         if(user != null){
-            var UserView = new IncomsView();
+            var IncomsView = new IncomsView(user);
             try {
-                UserView.switchToIncomsView(event);
+                IncomsView.switchToIncomsView(event);
             } catch (IOException e) {
                 e.printStackTrace(); // Możesz też dodać Alert z komunikatem błędu
             }
