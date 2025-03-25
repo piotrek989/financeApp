@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class User {
     public User(int id, String email, String password, String login) {
         this.id = id;
@@ -15,7 +17,7 @@ public class User {
     public String password;
     public String login;
 
-//    public ArrayList<Income> incomes;
-//    public ArrayList<Expense> expenses;
+    public ArrayList<Income> incomes;
+    public ArrayList<Expense> expenses;
 
 }

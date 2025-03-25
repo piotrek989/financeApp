@@ -11,6 +11,7 @@ public interface IModel {
     User getUserByCredentials(String email, String password);
     User getUserById(int id);
     ArrayList<Income> getUserIncomes(int userId);
+    ArrayList<Income> getUserTop3Incomes(int userid);
     ArrayList<Expense> getUserExpenses(int userId);
     boolean addUser(User user);
 

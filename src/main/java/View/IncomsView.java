@@ -1,6 +1,8 @@
 package View;
 
+import Model.Income;
 import Model.User;
+import Presenter.PresenterFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,15 +10,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
+
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class IncomsView{
     public IncomsView(User user){
         this.user = user;
         System.out.println(user.login+" "+user.email);
+
+
     }
     public IncomsView(){
 
@@ -41,7 +49,10 @@ public class IncomsView{
     @FXML
     Pane backgroundPane;
     @FXML
-    Label welLabel;
+    Label userNameLabel;
+
+    @FXML
+    GridPane gridPaneValue;
 
 
     private void reqFocusPane(){
@@ -76,12 +87,31 @@ public class IncomsView{
     @FXML
     public void setUserLoginOnLabel(){//this metod is inherited because public
         String login = user.login;
-        System.out.println("Oto login: "+login);
-        this.welLabel.setText("Welcome "+login);
+        this.userNameLabel.setText("Welcome "+login);
+
+
     }
 
     @FXML
-    public void switchToIncomsView(ActionEvent event) throws IOException {
+    public void setTextOnGridPaneTop3Incomes() {
+        System.out.println("ŁADOWANIE!!!");
+        PresenterFacade presenterFacade = new PresenterFacade();
+        ArrayList<Income> incomes = presenterFacade.getTopValueItemsOfUser(user.id);
+
+        for (int i = 0; i < incomes.size(); i++) {
+            Label price1 = new Label(String.valueOf(incomes.get(i).price));
+            Label date1 = new Label(String.valueOf(incomes.get(i).date));
+            Label type1 = new Label(String.valueOf(incomes.get(i).type));
+
+            gridPaneValue.add(price1, 1, i + 1);//col/row
+            gridPaneValue.add(date1, 2, i + 1);
+            gridPaneValue.add(type1, 3, i + 1);
+        }
+
+    }
+
+    @FXML
+    public void switchToIncomsView (ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(View.FinanceApplication.class.getResource("Incoms.fxml"));
 
         Parent root = loader.load();
@@ -92,23 +122,29 @@ public class IncomsView{
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
-        stage.setTitle("---Incoms View---");
+
         stage.setScene(scene);
         stage.show();
 
         incomsViewController.setUserLoginOnLabel();
+
     }
 
-    private void setUser(User user) {
+//    @FXML
+//    public void initialize() {
+//        System.out.println("Inicjalizacja widoku...");
+//        setAllGridPanes();
+//    }
+    private void setAllGridPanes(){
+        //setting stuff
+        setTextOnGridPaneTop3Incomes();
+
+    }
+
+    private void setUser (User user){
         this.user = user;
     }
 
 
-}
 
-//
-//public class IncomsView extends BaseUserView{
-//    public IncomsView(User user){
-//        super(user);
-//    }
-//}
+}

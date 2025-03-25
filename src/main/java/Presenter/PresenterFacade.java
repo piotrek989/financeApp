@@ -1,7 +1,10 @@
 package Presenter;
 
+import Model.Income;
 import Model.ModelFacade;
 import Model.User;
+
+import java.util.ArrayList;
 
 public class PresenterFacade implements IPresenter{
     @Override
@@ -9,6 +12,13 @@ public class PresenterFacade implements IPresenter{
         ModelFacade facade = new ModelFacade();
         User user = facade.getUserByCredentials(login, password);
         return user;
+    }
+
+    @Override
+    public ArrayList<Income> getTopValueItemsOfUser(int userid) {
+        ModelFacade facade = new ModelFacade();
+        ArrayList<Income> incoms = facade.getUserTop3Incomes(userid);
+        return incoms;
     }
 
     @Override
