@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IModel {
     void deleteUser(User user);
-    void addIncome(Income income);
+    boolean addIncome(Income income);
     void addExpense(Expense expense);
     void removeIncome(Income income);
     void removeExpense(Expense expense);

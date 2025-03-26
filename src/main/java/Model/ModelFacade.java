@@ -33,8 +33,29 @@ public class ModelFacade implements IModel {
     }
 
     @Override
-    public void addIncome(Income income) {
+    public boolean addIncome(Income income) {
+        String procedureCall = "INSERT INTO incoms (date, price, type, userId) VALUES (?, ?, ?, ?)";
 
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(procedureCall)) {
+
+            preparedStatement.setDate(1, java.sql.Date.valueOf(income.date));
+            preparedStatement.setFloat(2, income.price);
+            preparedStatement.setString(3, income.type);
+            preparedStatement.setInt(4, income.userId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Added item succesfully.");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error with adding user to DB: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

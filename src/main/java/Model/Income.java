@@ -14,4 +14,7 @@ public class Income {
         this.type = type;
         this.userId = userid;
     }
+    public Income(){
+
+    }
 }

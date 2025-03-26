@@ -10,8 +10,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import org.w3c.dom.Text;
 
@@ -22,9 +24,6 @@ import java.util.ArrayList;
 public class IncomsView{
     public IncomsView(User user){
         this.user = user;
-        System.out.println(user.login+" "+user.email);
-
-
     }
     public IncomsView(){
 
@@ -54,6 +53,18 @@ public class IncomsView{
     @FXML
     GridPane gridPaneValue;
 
+    @FXML
+    TextField dateField;
+
+    @FXML
+    TextField priceField;
+
+    @FXML
+    TextField typeField;
+
+    @FXML
+    Button addItemButton;
+
 
     private void reqFocusPane(){
         backgroundPane.setFocusTraversable(true);
@@ -67,8 +78,7 @@ public class IncomsView{
     }
     @FXML
     public void handlebtnIncoms(ActionEvent event) throws IOException {
-        var IncomsView = new IncomsView(user);
-        IncomsView.switchToIncomsView(event);
+        switchToIncomsView(event);
         reqFocusPane();
     }
     @FXML
@@ -93,6 +103,16 @@ public class IncomsView{
     }
 
     @FXML
+    public void handleButtonAddItem(){
+        Income income = getDataAboutIncome();
+        var PresenterFacade = new PresenterFacade();
+
+        if(!PresenterFacade.addIncome(income)){
+            System.out.println("UWAGA nie dodano itemu");
+        }
+    }
+
+    @FXML
     public void setTextOnGridPaneTop3Incomes() {
         System.out.println("ŁADOWANIE!!!");
         PresenterFacade presenterFacade = new PresenterFacade();
@@ -103,11 +123,21 @@ public class IncomsView{
             Label date1 = new Label(String.valueOf(incomes.get(i).date));
             Label type1 = new Label(String.valueOf(incomes.get(i).type));
 
-            gridPaneValue.add(price1, 1, i + 1);//col/row
+            // Stylowanie: większa czcionka i wyśrodkowanie
+            styleLabel(price1);
+            styleLabel(date1);
+            styleLabel(type1);
+
+            gridPaneValue.add(price1, 1, i + 1); // col / row
             gridPaneValue.add(date1, 2, i + 1);
             gridPaneValue.add(type1, 3, i + 1);
         }
+    }
 
+    private void styleLabel(Label label) {
+        label.setStyle("-fx-font-size: 18px; -fx-alignment: center;");
+        label.setMaxWidth(Double.MAX_VALUE); // pozwala się rozciągać w komórce
+        GridPane.setHalignment(label, javafx.geometry.HPos.CENTER); // poziome wyśrodkowanie
     }
 
     @FXML
@@ -127,21 +157,29 @@ public class IncomsView{
         stage.show();
 
         incomsViewController.setUserLoginOnLabel();
+        incomsViewController.setAllGridPanes();//need be this here incomsViewController. ....
 
     }
 
-//    @FXML
-//    public void initialize() {
-//        System.out.println("Inicjalizacja widoku...");
-//        setAllGridPanes();
-//    }
+    private Income getDataAboutIncome(){
+        Income income = new Income();
+
+        income.date = dateField.getText().trim();
+        income.price = Float.valueOf(priceField.getText().trim());
+        income.type = typeField.getText().trim();
+        income.userId = user.id;//need this !!
+
+        return income;
+    }
+
+
     private void setAllGridPanes(){
         //setting stuff
         setTextOnGridPaneTop3Incomes();
 
     }
 
-    private void setUser (User user){
+    public void setUser (User user){
         this.user = user;
     }
 

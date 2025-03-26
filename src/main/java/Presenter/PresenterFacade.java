@@ -3,7 +3,9 @@ package Presenter;
 import Model.Income;
 import Model.ModelFacade;
 import Model.User;
+import View.FinanceApplication;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 
 public class PresenterFacade implements IPresenter{
@@ -33,5 +35,16 @@ public class PresenterFacade implements IPresenter{
         if(ifAddedUser){
             return true;
         } else return false;
+    }
+
+    @Override
+    public boolean addIncome(Income income) {
+        ModelFacade facade = new ModelFacade();
+        boolean bool = facade.addIncome(income);//adding income to DB and taking it;s bool value
+
+        if(!bool){
+            return false;
+        } return true;
+
     }
 }
