@@ -109,9 +109,37 @@ public class ModelFacade implements IModel {
 
     @Override
     public ArrayList<Income> getUserIncomes(int userId) {
+        ArrayList<Income> incomes = new ArrayList<>(); // Initialize the list
 
+        String sql = "SELECT * FROM incoms WHERE userid = ? ORDER BY date";
 
-        return new ArrayList<>(0);
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Income income = new Income(
+                        rs.getInt("id"),
+                        rs.getDate("date").toString(),
+                        rs.getFloat("price"),
+                        rs.getString("type"),
+                        rs.getInt("userid")
+                );
+//                System.out.println("Oto date: " + income.date);
+                incomes.add(income);
+            }
+
+            if (incomes.isEmpty()) {
+                System.out.println("Nie znaleziono dochodów dla użytkownika o ID: " + userId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return incomes; // Zwróć pełną listę wyników
     }
 
     @Override
@@ -134,7 +162,6 @@ public class ModelFacade implements IModel {
                         rs.getString("type"),
                         rs.getInt("userid")
                 );
-                System.out.println("Oto date: " + income.date);
                 incomes.add(income);
             }
 

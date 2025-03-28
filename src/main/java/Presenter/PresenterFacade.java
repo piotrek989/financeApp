@@ -47,4 +47,11 @@ public class PresenterFacade implements IPresenter{
         } return true;
 
     }
+
+    @Override
+    public ArrayList<Income> getUserIncomes(int userid) {
+        ModelFacade facade = new ModelFacade();
+        ArrayList<Income> incoms = facade.getUserIncomes(userid);
+        return incoms;
+    }
 }
