@@ -54,4 +54,10 @@ public class PresenterFacade implements IPresenter{
         ArrayList<Income> incoms = facade.getUserIncomes(userid);
         return incoms;
     }
+
+    @Override
+    public void deleteIncome(int incomeid) {
+        ModelFacade facade = new ModelFacade();
+        facade.removeIncome(incomeid);
+    }
 }

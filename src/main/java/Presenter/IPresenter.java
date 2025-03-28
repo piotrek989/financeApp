@@ -13,6 +13,7 @@ public interface IPresenter {
     ArrayList<Income> getTopValueItemsOfUser(int userid);
 
     boolean addIncome(Income income);
+    void deleteIncome(int incomeid);
     ArrayList<Income> getUserIncomes(int userid);
 
 

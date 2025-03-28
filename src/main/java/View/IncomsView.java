@@ -6,12 +6,17 @@ import Presenter.PresenterFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -69,6 +74,10 @@ public class IncomsView{
     @FXML
     AnchorPane middleAnchor;
 
+    @FXML
+    Button buttonReloadData;
+
+
 
     private void reqFocusPane(){
         backgroundPane.setFocusTraversable(true);
@@ -107,6 +116,11 @@ public class IncomsView{
     }
 
     @FXML
+    public void handleReloadButton(ActionEvent event) throws Exception{
+        switchToIncomsView(event);
+    }
+
+    @FXML
     public void handleButtonAddItem(){
         Income income = getDataAboutIncome();
         var PresenterFacade = new PresenterFacade();
@@ -116,7 +130,6 @@ public class IncomsView{
         }
     }
 
-    @FXML
     public void setTextOnGridPaneTop3Incomes() {
         PresenterFacade presenterFacade = new PresenterFacade();
         ArrayList<Income> incomes = presenterFacade.getTopValueItemsOfUser(user.id);
@@ -148,6 +161,20 @@ public class IncomsView{
         label.setMaxWidth(Double.MAX_VALUE); // pozwala się rozciągać w komórce
         GridPane.setHalignment(label, javafx.geometry.HPos.CENTER); // poziome wyśrodkowanie
     }
+
+    private void styleDeleteButton(Button btn) {
+        ImageView deleteIcon = new ImageView(new Image(getClass().getResourceAsStream("/logo/delete_bin.png")));
+        deleteIcon.setFitWidth(20);
+        deleteIcon.setFitHeight(20);
+
+        btn.setGraphic(deleteIcon);
+        btn.setPrefSize(40, 40);
+
+        GridPane.setHalignment(btn, HPos.CENTER);
+        GridPane.setValignment(btn, VPos.CENTER);
+    }
+
+
 
     @FXML
     public void switchToIncomsView (ActionEvent event) throws IOException {
@@ -204,12 +231,16 @@ public class IncomsView{
         gridPaneAllIncoms.getColumnConstraints().add(col2);
 
         ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(30);
+        col3.setPercentWidth(25);
         gridPaneAllIncoms.getColumnConstraints().add(col3);
 
         ColumnConstraints col4 = new ColumnConstraints();
-        col4.setPercentWidth(35);
+        col4.setPercentWidth(30);
         gridPaneAllIncoms.getColumnConstraints().add(col4);
+
+        ColumnConstraints col5 = new ColumnConstraints();//deletion of income
+        col5.setPercentWidth(10);
+        gridPaneAllIncoms.getColumnConstraints().add(col5);
 
         RowConstraints rowConstraints = new RowConstraints();
         rowConstraints.setPrefHeight(65);
@@ -219,20 +250,24 @@ public class IncomsView{
         Label priceLabel = new Label("Price");
         Label dateLabel = new Label("Date");
         Label typeLabel = new Label("Type");
+        Label deleteLabel = new Label("Deletion");
 
         styleLabelBolded(noLabel);
         styleLabelBolded(priceLabel);
         styleLabelBolded(dateLabel);
         styleLabelBolded(typeLabel);
+        styleLabelBolded(deleteLabel);
 
 
         gridPaneAllIncoms.add(noLabel, 0, 0);
         gridPaneAllIncoms.add(priceLabel, 1, 0);
         gridPaneAllIncoms.add(dateLabel, 2, 0);
         gridPaneAllIncoms.add(typeLabel, 3, 0);
+        gridPaneAllIncoms.add(deleteLabel, 4, 0);
 
         PresenterFacade presenterFacade = new PresenterFacade();
         ArrayList<Income> incomes = presenterFacade.getUserIncomes(user.id);//gettin info about user
+        user.incomes = incomes;//setting incomes of our userxD
         int incomesCount = incomes.size();
 
         for (int i = 0; i < incomesCount; i++) {
@@ -246,16 +281,19 @@ public class IncomsView{
             Label price1 = new Label(String.valueOf(incomes.get(i).price));
             Label date1 = new Label(String.valueOf(incomes.get(i).date));
             Label type1 = new Label(String.valueOf(incomes.get(i).type));
+            ButtonWithId deleteButton = new ButtonWithId(user.incomes.get(i).id);//it's id on an income
 
             styleLabel(no);
             styleLabel(price1);
             styleLabel(date1);
             styleLabel(type1);
+            styleDeleteButton(deleteButton);
 
             gridPaneAllIncoms.add(no, 0, i + 1);
             gridPaneAllIncoms.add(price1, 1, i + 1);
             gridPaneAllIncoms.add(date1, 2, i + 1);
             gridPaneAllIncoms.add(type1, 3, i + 1);
+            gridPaneAllIncoms.add(deleteButton, 4, i + 1);
 
 
         }

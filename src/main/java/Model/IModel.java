@@ -6,7 +6,7 @@ public interface IModel {
     void deleteUser(User user);
     boolean addIncome(Income income);
     void addExpense(Expense expense);
-    void removeIncome(Income income);
+    void removeIncome(int incomeid);
     void removeExpense(Expense expense);
     User getUserByCredentials(String email, String password);
     User getUserById(int id);

@@ -64,9 +64,20 @@ public class ModelFacade implements IModel {
     }
 
     @Override
-    public void removeIncome(Income income) {
+    public void removeIncome(int idIncome) {
+        String sql = "DELETE FROM incoms WHERE id = ?";
 
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, idIncome);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @Override
     public void removeExpense(Expense expense) {
