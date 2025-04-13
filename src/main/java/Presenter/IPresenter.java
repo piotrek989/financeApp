@@ -14,7 +14,9 @@ public interface IPresenter {
 
     boolean addIncome(Income income);
     void deleteIncome(int incomeid);
+    boolean validateIfMailAndLoginNotExists(String mail, String login);
     ArrayList<Income> getUserIncomes(int userid);
+    boolean addIncoms(ArrayList<Income> incomes);
 
 
 }

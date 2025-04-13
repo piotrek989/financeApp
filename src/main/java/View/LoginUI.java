@@ -45,7 +45,6 @@ public class LoginUI extends IncomsView{
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
         Scene scene = new Scene(root);
-        stage.setTitle("---Logging---");
         stage.setScene(scene);
     }
 

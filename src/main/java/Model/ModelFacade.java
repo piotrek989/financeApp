@@ -109,7 +109,7 @@ public class ModelFacade implements IModel {
 
                 );
             } else{
-                System.out.println("Nie znaleziono uzytkownika!");
+                System.out.println("User not found!");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,12 +138,11 @@ public class ModelFacade implements IModel {
                         rs.getString("type"),
                         rs.getInt("userid")
                 );
-//                System.out.println("Oto date: " + income.date);
                 incomes.add(income);
             }
 
             if (incomes.isEmpty()) {
-                System.out.println("Nie znaleziono dochodów dla użytkownika o ID: " + userId);
+                System.out.println("Not found incoms for user with id" + userId);
             }
 
         } catch (SQLException e) {
@@ -177,7 +176,7 @@ public class ModelFacade implements IModel {
             }
 
             if (incomes.isEmpty()) {
-                System.out.println("Nie znaleziono dochodów dla użytkownika o ID: " + userId);
+                System.out.println("Incoms not found for user with id " + userId);
             }
 
         } catch (SQLException e) {
@@ -206,15 +205,75 @@ public class ModelFacade implements IModel {
             int rowsAffected = preparedStatement.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Użytkownik został pomyślnie dodany.");
+                System.out.println("User added correctly.");
                 return true;
             }
 
         } catch (SQLException e) {
-            System.err.println("Błąd podczas dodawania użytkownika: " + e.getMessage());
+            System.err.println("Error when adding user " + e.getMessage());
             e.printStackTrace();
         }
         return false;
     }
 
+    @Override
+    public boolean validateIfEmailAndLoginNotExists(String email, String login) {
+        String query = "SELECT COUNT(*) FROM users WHERE email = ? OR login = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, login);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return (count == 0);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Login or Email already exists " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addIncomes(ArrayList<Income> incomes) {
+        String procedureCall = "INSERT INTO incoms (date, price, type, userId) VALUES (?, ?, ?, ?)";
+        boolean allSuccess = true;
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(procedureCall)) {
+
+            for (Income income : incomes) {
+                preparedStatement.setDate(1, java.sql.Date.valueOf(income.date));
+                preparedStatement.setFloat(2, income.price);
+                preparedStatement.setString(3, income.type);
+                preparedStatement.setInt(4, income.userId);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected == 0) {
+                    System.err.println("Failed to insert income: " + income);
+                    allSuccess = false;
+                }
+            }
+
+            if (allSuccess) {
+                System.out.println("All incomes added successfully.");
+            } else {
+                System.err.println("Some incomes failed to add.");
+            }
+
+            return allSuccess;
+
+        } catch (SQLException e) {
+            System.err.println("Error adding incomes to DB: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

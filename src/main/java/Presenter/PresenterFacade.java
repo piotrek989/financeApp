@@ -17,6 +17,12 @@ public class PresenterFacade implements IPresenter{
     }
 
     @Override
+    public boolean validateIfMailAndLoginNotExists(String mail, String login) {
+        ModelFacade facade = new ModelFacade();
+        return facade.validateIfEmailAndLoginNotExists(mail, login);
+    }
+
+    @Override
     public ArrayList<Income> getTopValueItemsOfUser(int userid) {
         ModelFacade facade = new ModelFacade();
         ArrayList<Income> incoms = facade.getUserTop3Incomes(userid);
@@ -59,5 +65,14 @@ public class PresenterFacade implements IPresenter{
     public void deleteIncome(int incomeid) {
         ModelFacade facade = new ModelFacade();
         facade.removeIncome(incomeid);
+    }
+
+    @Override
+    public boolean addIncoms(ArrayList<Income> incomes){
+        ModelFacade facade = new ModelFacade();
+        boolean bool = facade.addIncomes(incomes);
+        if(!bool){
+            return false;
+        } return true;
     }
 }

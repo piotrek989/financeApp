@@ -17,4 +17,10 @@ public class Income {
     public Income(){
 
     }
+    public Income(String date, float price, String type, int userid) {
+        this.date = date;
+        this.price = price;
+        this.type = type;
+        this.userId = userid;
+    }
 }

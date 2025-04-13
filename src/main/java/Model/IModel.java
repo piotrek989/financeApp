@@ -14,6 +14,8 @@ public interface IModel {
     ArrayList<Income> getUserTop3Incomes(int userid);
     ArrayList<Expense> getUserExpenses(int userId);
     boolean addUser(User user);
+    boolean validateIfEmailAndLoginNotExists(String email, String login);
+    boolean addIncomes(ArrayList<Income> incomes);
 
 }
 

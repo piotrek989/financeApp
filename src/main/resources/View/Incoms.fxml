@@ -15,6 +15,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
+<!--<Button fx:id="logoutButton" alignment="BOTTOM_CENTER" layoutX="41.0" layoutY="756.0" mnemonicParsing="false" onAction="#handlebtnLogout" text="Logout" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">-->
+
 <BorderPane fx:id="backgroundPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.IncomsView">
     <top>
         <AnchorPane prefHeight="0.0" prefWidth="1482.0" style="-fx-background-color: E1FAE0;" BorderPane.alignment="CENTER">
@@ -216,6 +218,11 @@
                </font>
             </Button>
             <Button fx:id="buttonReloadData" layoutX="20.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleReloadButton" prefHeight="37.0" prefWidth="114.0" text="Reload data" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="loadCSVBtn" alignment="BOTTOM_CENTER" layoutX="79.0" layoutY="795.0" mnemonicParsing="false" onAction="#handleLoadCSVBtn" text="Load from CSV" AnchorPane.bottomAnchor="49.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                <font>
                   <Font size="18.0" />
                </font>

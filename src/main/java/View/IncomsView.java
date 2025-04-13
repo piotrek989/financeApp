@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,14 +17,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
-
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class IncomsView{
     public IncomsView(User user){
@@ -77,6 +78,9 @@ public class IncomsView{
     @FXML
     Button buttonReloadData;
 
+    @FXML
+    Button loadCSVBtn;
+
 
 
     private void reqFocusPane(){
@@ -114,6 +118,54 @@ public class IncomsView{
 
 
     }
+    @FXML
+    public void handleLoadCSVBtn(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select CSV File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+
+        if (selectedFile != null) {
+            ArrayList<Income> loadedIncomes = new ArrayList<>();
+            Pattern datePattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$"); // yyyy-MM-dd
+
+            try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
+                String line;
+                int lineNumber = 0;
+
+                while ((line = br.readLine()) != null) {
+                    lineNumber++;
+                    String[] parts = line.split(";");
+                    if (parts.length != 3) {
+                        showAlert("Info", "Error on line " + lineNumber + ": Incorrect number of fields.");
+                        return;
+                    }
+
+                    String date = parts[0].trim();
+                    String priceStr = parts[1].trim();
+                    String type = parts[2].trim();
+
+                    if (!datePattern.matcher(date).matches()) {
+                        showAlert("Info", "Error on line " + lineNumber + ": Invalid date format. Expected YYYY-MM-DD.");
+                        return;
+                    }
+
+                    try {
+                        float price = Float.parseFloat(priceStr);//price tpyu float
+                        loadedIncomes.add(new Income(date, price, type, user.id));
+                    } catch (NumberFormatException e) {
+                        showAlert("Info", "Error on line " + lineNumber + ": Price is not a valid number.");
+                        return;
+                    }
+                }
+                PresenterFacade facade = new PresenterFacade();
+                facade.addIncoms(loadedIncomes);//adding all lines from csv file
+
+                System.out.println("Loaded " + loadedIncomes.size() + " incomes");
+            }
+        }
+    }
+
 
     @FXML
     public void handleReloadButton(ActionEvent event) throws Exception{
@@ -122,13 +174,64 @@ public class IncomsView{
 
     @FXML
     public void handleButtonAddItem(){
-        Income income = getDataAboutIncome();
-        var PresenterFacade = new PresenterFacade();
+        boolean validationOfFieldIncoms = validateFieldsOfIncome();
+        if (validationOfFieldIncoms) {
+            Income income = getDataAboutIncome();//gettin info from fields
+            boolean innerVal = innerValidation(income);//checking those format of each field (price>0, date corr format)
+            if (innerVal) {
+                var PresenterFacade = new PresenterFacade();
 
-        if(!PresenterFacade.addIncome(income)){
-            System.out.println("UWAGA nie dodano itemu");
+                if (!PresenterFacade.addIncome(income))
+                    showAlert("Inncorect format", "Not added to database");
+
+            }
+
         }
     }
+
+    public boolean validateFieldsOfIncome() {
+        if (dateField == null || dateField.getText().trim().isEmpty()) {
+            showAlert("Invalid Date", "date field cannot be empty.");
+            return false;
+        }
+
+        if (priceField == null || priceField.getText().trim().isEmpty()) {
+            showAlert("Invalid Amount", "price field cannot be empty.");
+            return false;
+        }
+
+        if (typeField == null || typeField.getText().trim().isEmpty()) {//check if is not null and if fulfilled
+            showAlert("Invalid Type", "type field cannot be empty.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean innerValidation(Income income) {
+        if (!income.date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            showAlert("Invalid Date Format", "Date must be in the format YYYY-MM-DD (e.g. 2025-04-12).");
+            return false;
+        }
+
+        if (income.price <= 0) {
+            showAlert("Invalid Amount", "Amount must be a number greater than zero.");
+            return false;
+        }
+
+        return true;
+
+    }
+
+    // Metoda pomocnicza do wyświetlania alertów
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     public void setTextOnGridPaneTop3Incomes() {
         PresenterFacade presenterFacade = new PresenterFacade();
