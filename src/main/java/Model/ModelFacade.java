@@ -58,10 +58,6 @@ public class ModelFacade implements IModel {
         return false;
     }
 
-    @Override
-    public void addExpense(Expense expense) {
-
-    }
 
     @Override
     public void removeIncome(int idIncome) {
@@ -76,12 +72,6 @@ public class ModelFacade implements IModel {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-
-    @Override
-    public void removeExpense(Expense expense) {
-
     }
 
     @Override
@@ -186,10 +176,6 @@ public class ModelFacade implements IModel {
         return incomes; // Zwróć pełną listę wyników
     }
 
-    @Override
-    public ArrayList<Expense> getUserExpenses(int userId) {
-        return new ArrayList<>(0);
-    }
 
     @Override
     public boolean addUser(User user) {
@@ -275,5 +261,153 @@ public class ModelFacade implements IModel {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public void removeExpense(int expenseid) {
+        String sql = "DELETE FROM expenses WHERE id = ?";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, expenseid);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean addExpenses(ArrayList<Expense> expenses) {
+        String procedureCall = "INSERT INTO expenses (date, price, type, userId) VALUES (?, ?, ?, ?)";
+        boolean allSuccess = true;
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(procedureCall)) {
+
+            for (Expense expense : expenses) {
+                preparedStatement.setDate(1, java.sql.Date.valueOf(expense.date));
+                preparedStatement.setFloat(2, expense.price);
+                preparedStatement.setString(3, expense.type);
+                preparedStatement.setInt(4, expense.userId);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected == 0) {
+                    System.err.println("Failed to insert expense: " + expenses);
+                    allSuccess = false;
+                }
+            }
+
+            if (allSuccess) {
+                System.out.println("All expenses added successfully.");
+            } else {
+                System.err.println("Some expenses failed to add.");
+            }
+
+            return allSuccess;
+
+        } catch (SQLException e) {
+            System.err.println("Error adding expenses to DB: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }    }
+
+    @Override
+    public ArrayList<Expense> getUserTop3Expenses(int userid) {
+        ArrayList<Expense> expenses = new ArrayList<>(); // Initialize the list
+
+        String sql = "SELECT * FROM expenses WHERE userid = ? ORDER BY price DESC LIMIT 3";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userid);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Expense expense = new Expense(
+                        rs.getInt("id"),
+                        rs.getDate("date").toString(),
+                        rs.getFloat("price"),
+                        rs.getString("type"),
+                        rs.getInt("userid")
+                );
+                expenses.add(expense);
+            }
+
+            if (expenses.isEmpty()) {
+                System.out.println("Expenses not found for user with id " + userid);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return expenses; // Zwróć pełną listę wyników
+    }
+//    @Override
+//    public void removeExpense(Expense expense) {
+//
+//    }
+
+    @Override
+    public boolean addExpense(Expense expense) {
+        String procedureCall = "INSERT INTO expenses (date, price, type, userId) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(procedureCall)) {
+
+            preparedStatement.setDate(1, java.sql.Date.valueOf(expense.date));
+            preparedStatement.setFloat(2, expense.price);
+            preparedStatement.setString(3, expense.type);
+            preparedStatement.setInt(4, expense.userId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Added item succesfully.");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error with adding expense to DB: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public ArrayList<Expense> getUserExpenses(int userId) {
+        ArrayList<Expense> expenses = new ArrayList<>(); // Initialize the list
+
+        String sql = "SELECT * FROM expenses WHERE userid = ? ORDER BY date";
+
+        try (Connection conn = getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Expense expense = new Expense(
+                        rs.getInt("id"),
+                        rs.getDate("date").toString(),
+                        rs.getFloat("price"),
+                        rs.getString("type"),
+                        rs.getInt("userid")
+                );
+                expenses.add(expense);
+            }
+
+            if (expenses.isEmpty()) {
+                System.out.println("Not found expenses for user with id" + userId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return expenses; // Zwróć pełną listę wyników
     }
 }

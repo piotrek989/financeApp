@@ -20,7 +20,6 @@ public class ChartsView {
 
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow(); // Pobierz aktualne okno
         Scene scene = new Scene(root);
-        stage.setTitle("---Charts View---");
         stage.setScene(scene);
     }
 

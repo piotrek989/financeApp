@@ -100,7 +100,7 @@ public class IncomsView{
     }
     @FXML
     public void handlebtnExpenses(ActionEvent event) throws IOException {
-        var ExpensesView = new ExpensesView();
+        var ExpensesView = new ExpensesView(user);//here need user bacuse error of user == null
         ExpensesView.switchToExpensesView(event);
         reqFocusPane();
     }

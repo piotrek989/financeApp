@@ -16,7 +16,6 @@ public class FinanceApplication extends Application {
         LoginUI loginUIController = fxmlLoader.getController();//dodane
         loginUIController.setStage(stage);//podanie stage w argumencie
 
-        stage.setTitle("Logging");
         stage.setScene(scene);
         stage.show();
     }

@@ -55,7 +55,7 @@ public class LoginUI extends IncomsView{
         PresenterFacade facade = new PresenterFacade();
         User user = facade.logIn(login, password);
         if(user != null){
-            var IncomsView = new IncomsView(user);
+            var IncomsView = new IncomsView(user);//very important
             try {
                 IncomsView.switchToIncomsView(event);
             } catch (IOException e) {

@@ -1,5 +1,6 @@
 package Presenter;
 
+import Model.Expense;
 import Model.Income;
 import Model.ModelFacade;
 import Model.User;
@@ -20,13 +21,6 @@ public class PresenterFacade implements IPresenter{
     public boolean validateIfMailAndLoginNotExists(String mail, String login) {
         ModelFacade facade = new ModelFacade();
         return facade.validateIfEmailAndLoginNotExists(mail, login);
-    }
-
-    @Override
-    public ArrayList<Income> getTopValueItemsOfUser(int userid) {
-        ModelFacade facade = new ModelFacade();
-        ArrayList<Income> incoms = facade.getUserTop3Incomes(userid);
-        return incoms;
     }
 
     @Override
@@ -53,6 +47,12 @@ public class PresenterFacade implements IPresenter{
         } return true;
 
     }
+    @Override
+    public ArrayList<Income> getTopValueItemsOfUser(int userid) {
+        ModelFacade facade = new ModelFacade();
+        ArrayList<Income> incoms = facade.getUserTop3Incomes(userid);
+        return incoms;
+    }
 
     @Override
     public ArrayList<Income> getUserIncomes(int userid) {
@@ -75,4 +75,45 @@ public class PresenterFacade implements IPresenter{
             return false;
         } return true;
     }
+    //added stuff for expenses only
+
+    @Override
+    public boolean addExpenses(ArrayList<Expense> expenses) {
+        ModelFacade facade = new ModelFacade();
+        boolean bool = facade.addExpenses(expenses);
+        if(!bool){
+            return false;
+        } return true;
+    }
+
+    @Override
+    public void deleteExpense(int expid) {
+        ModelFacade facade = new ModelFacade();
+        facade.removeExpense(expid);
+    }
+
+    @Override
+    public ArrayList<Expense> getTopExpensesOfUser(int userid) {
+        ModelFacade facade = new ModelFacade();
+        ArrayList<Expense> expenses = facade.getUserTop3Expenses(userid);
+        return expenses;
+    }
+
+    @Override
+    public boolean addExpense(Expense expense) {
+        ModelFacade facade = new ModelFacade();
+        boolean bool = facade.addExpense(expense);//adding expense to DB and taking it's bool value
+
+        if(!bool){
+            return false;
+        } return true;
+    }
+
+    @Override
+    public ArrayList<Expense> getUserExpenses(int userid) {
+        ModelFacade facade = new ModelFacade();
+        ArrayList<Expense> expenses = facade.getUserExpenses(userid);
+        return expenses;
+    }
+
 }
