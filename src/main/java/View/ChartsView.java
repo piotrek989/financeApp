@@ -214,8 +214,8 @@ public class ChartsView {
                 Tooltip.install(data.getNode(), tooltip);
             }
         });
-        incomsChart.setTitle("      Incomes in days");
-        expensesChart.setTitle("      Expenses in days");
+        incomsChart.setTitle("      Incomes depending on day");
+        expensesChart.setTitle("      Expenses depending on day");
     }
 
     private String getExpenseTypeByDate(ArrayList<Expense> expenses, String date, float price) {
