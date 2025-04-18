@@ -1,4 +1,4 @@
-# 💼 Project – Finance App
+# Project – Finance App
 
 This project is a desktop application, designed to help users manage
 their **personal finances**. It allows users to **register, log in,
@@ -10,7 +10,7 @@ and the frontend was built with **JavaFX**.
 
 ---
 
-## 🚀 Features
+## Features
 
 - **User Registration & Login**
     - Full validation of credentials and secure access.
@@ -23,9 +23,9 @@ and the frontend was built with **JavaFX**.
 
 ---
 
-## 🖼️ Screenshots
+## 🖼Screenshots
 
-### 🔐 Login Panel
+### Login Panel
 Allows existing users to log in with proper authentication. If the user
 is not in DB the alert with proper message is showing.
 
@@ -33,14 +33,14 @@ is not in DB the alert with proper message is showing.
 
 ---
 
-### 📝 Registration Panel
+### Registration Panel
 Validates user input such as email format, password strength, and login uniqueness.
 
 ![Registration](screenshots/registration.png)
 
 ---
 
-### 💰 Income Management
+### Income Management
 Displays the **top 3 incomes**, allows adding new entries, 
 and provides full listing with deletion capability.
 All incomes is sorted by date.
@@ -49,7 +49,7 @@ All incomes is sorted by date.
 
 ---
 
-### 💸 Expense Management
+### Expense Management
 Works the same way as income but for **expenses**.
 
 ![Expenses](screenshots/expenses.png)
@@ -63,7 +63,7 @@ Graphs for **incomes and expenses by day** for visual insights.
 
 ---
 
-### 🧩 Pie and Line Charts
+### Pie and Line Charts
 - **Left chart**: Pie showing the **ratio between incomes and expenses**.
 - **Right chart**: Line graph showing **cumulative sums** for both incomes and expenses over time.
 
@@ -71,7 +71,7 @@ Graphs for **incomes and expenses by day** for visual insights.
 
 ---
 
-## ⚙️ Tech Stack
+## ⚙Tech Stack
 
 - **JavaFX**
 - **PostgreSQL** (pgAdmin)
@@ -87,14 +87,14 @@ Follow these steps to set up and run the application on your machine from scratc
 
 ---
 
-### ✅ Requirements
+### Requirements
 
 - **Java 17+**
 - **Maven**
 - **PostgreSQL + pgAdmin**
 ---
 
-### 📦 Setup Instructions
+### Setup Instructions
 
 1. **Clone the Repository**
 
