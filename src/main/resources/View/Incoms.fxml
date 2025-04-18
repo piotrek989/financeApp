@@ -164,7 +164,7 @@
             </StackPane>
             <StackPane alignment="TOP_CENTER" layoutX="50.0" layoutY="14.0" maxHeight="79.0" minHeight="79.0" prefHeight="79.0" prefWidth="1054.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                <children>
-                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="340.0" text="Top 3 most value incoms" StackPane.alignment="TOP_CENTER">
+                  <Label maxHeight="-Infinity" minHeight="-Infinity" prefHeight="79.0" prefWidth="358.0" text="Top 3 most value incomes" StackPane.alignment="TOP_CENTER">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>
@@ -173,7 +173,7 @@
             </StackPane>
             <StackPane layoutX="50.0" layoutY="377.0" prefHeight="79.0" prefWidth="1054.0" AnchorPane.bottomAnchor="455.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="377.0">
                <children>
-                  <Label prefHeight="70.0" prefWidth="145.0" text="All incoms" StackPane.alignment="TOP_CENTER">
+                  <Label prefHeight="46.0" prefWidth="162.0" text="All incomes" StackPane.alignment="TOP_CENTER">
                      <font>
                         <Font name="System Bold" size="29.0" />
                      </font>

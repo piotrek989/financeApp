@@ -257,7 +257,7 @@ public class ChartsView {
         );
 
         circleChart.setData(pieChartData);
-        circleChart.setTitle("Total Incoms and Expenses");
+        circleChart.setTitle("Total Incomes and Expenses");
     }
 
     public void getInExChartFullFilled() throws IOException {
@@ -295,7 +295,7 @@ public class ChartsView {
         float cumulativeExpense = 0;
 
         XYChart.Series<String, Number> incomeSeries = new XYChart.Series<>();
-        incomeSeries.setName("Cumulative Income");
+        incomeSeries.setName("Cumulative Incomes");
 
         XYChart.Series<String, Number> expenseSeries = new XYChart.Series<>();
         expenseSeries.setName("Cumulative Expense");
@@ -326,7 +326,7 @@ public class ChartsView {
         // Etykieta osi Y
         NumberAxis yAxis = (NumberAxis) InExChart.getYAxis();
         yAxis.setLabel("Amount (PLN)");
-        InExChart.setTitle("        Comparison Incoms vs Expenses");
+        InExChart.setTitle("        Comparison Incomes vs Expenses");
     }
 
 
