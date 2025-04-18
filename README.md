@@ -2,7 +2,9 @@
 
 This project is a desktop application, designed to help users manage
 their **personal finances**. It allows users to **register, log in,
-track incomes and expenses**, and **visualize data** through various charts. 
+track incomes and expenses**, and **visualize data** through various charts.
+User can add more data by csv file formatted: date;price;type.
+
 The backend uses **PostgreSQL** via **pgAdmin** and **Java**,
 and the frontend was built with **JavaFX**.
 
