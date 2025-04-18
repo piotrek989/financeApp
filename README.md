@@ -23,7 +23,7 @@ and the frontend was built with **JavaFX**.
 
 ---
 
-##Screenshots
+## Screenshots
 
 ### Login Panel
 Allows existing users to log in with proper authentication. If the user
