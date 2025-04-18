@@ -106,7 +106,7 @@ public class IncomsView{
     }
     @FXML
     public void handlebtnCharts(ActionEvent event) throws IOException {
-        var ChartsView = new ChartsView();//we dont pass the user yet
+        var ChartsView = new ChartsView(user);//we pass
         ChartsView.switchToChartsView(event);
         reqFocusPane();
     }
@@ -384,7 +384,7 @@ public class IncomsView{
             Label price1 = new Label(String.valueOf(incomes.get(i).price));
             Label date1 = new Label(String.valueOf(incomes.get(i).date));
             Label type1 = new Label(String.valueOf(incomes.get(i).type));
-            ButtonWithId deleteButton = new ButtonWithId(user.incomes.get(i).id);//it's id on an income
+            ButtonWithId deleteButton = new ButtonWithId(user.incomes.get(i).id, ButtonWithId.Type.INCOME);//it's id on an income
 
             styleLabel(no);
             styleLabel(price1);

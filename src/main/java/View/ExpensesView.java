@@ -1,7 +1,6 @@
 package View;
 
 import Model.Expense;
-import Model.Income;
 import Model.User;
 import Presenter.PresenterFacade;
 import javafx.event.ActionEvent;
@@ -113,7 +112,7 @@ public class ExpensesView {
     }
     @FXML
     public void handlebtnCharts(ActionEvent event) throws IOException {
-        var ChartsView = new ChartsView();//we dont pass the user yet
+        var ChartsView = new ChartsView(user);//we pass
         ChartsView.switchToChartsView(event);
         reqFocusPane();
     }
@@ -375,7 +374,7 @@ public class ExpensesView {
 
         PresenterFacade presenterFacade = new PresenterFacade();
         ArrayList<Expense> expenses = presenterFacade.getUserExpenses(user.id);//gettin info about user
-        user.expenses = expenses;//setting incomes of our userxD
+        user.expenses = expenses;//setting expenses of our userxD
         int expensesCount = expenses.size();
 
         for (int i = 0; i < expensesCount; i++) {
@@ -389,7 +388,7 @@ public class ExpensesView {
             Label price1 = new Label(String.valueOf(expenses.get(i).price));
             Label date1 = new Label(String.valueOf(expenses.get(i).date));
             Label type1 = new Label(String.valueOf(expenses.get(i).type));
-            ButtonWithId deleteButton = new ButtonWithId(user.expenses.get(i).id);//it's id on an income
+            ButtonWithId deleteButton = new ButtonWithId(user.expenses.get(i).id, ButtonWithId.Type.EXPENSE);
 
             styleLabel(no);
             styleLabel(price1);
