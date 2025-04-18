@@ -23,7 +23,7 @@ and the frontend was built with **JavaFX**.
 
 ---
 
-## 🖼Screenshots
+##Screenshots
 
 ### Login Panel
 Allows existing users to log in with proper authentication. If the user
@@ -56,7 +56,7 @@ Works the same way as income but for **expenses**.
 
 ---
 
-### 📊 Daily Overview Charts
+### Daily Overview Charts
 Graphs for **incomes and expenses by day** for visual insights.
 
 ![Graph 1](screenshots/graph_1.png)
@@ -71,7 +71,7 @@ Graphs for **incomes and expenses by day** for visual insights.
 
 ---
 
-## ⚙Tech Stack
+##Tech Stack
 
 - **JavaFX**
 - **PostgreSQL** (pgAdmin)
@@ -81,7 +81,7 @@ Graphs for **incomes and expenses by day** for visual insights.
 
 ---
 
-## 🛠️ How to Run the Project Locally
+## How to Run the Project Locally
 
 Follow these steps to set up and run the application on your machine from scratch.
 
